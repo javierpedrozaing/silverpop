@@ -31,8 +31,8 @@
             <div class="content-modal">
                 <h3>Descarga el calendario con todas las promociones</h3>       
                 <img src="/img/download.png" alt="">
-                <p><a href="">calenadario_promociones.ics</a></p>                
-                <input class="btn btn-primary" type="button" value="Enviar">
+                <p><a href="/Evento_exito.ics">calenadario_promociones.ics</a></p>                
+                <a href="/Evento_exito.ics"><input class="btn btn-primary" type="button" value="Enviar"></a>
             </div>
         </div>
         <div class="modal-success-mobile">
