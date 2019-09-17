@@ -22,6 +22,15 @@ class FormController extends Controller
         return view('index')->with('products', $products);
     }
 
+    public function loginSilverpop(){
+        $auth = array(
+			'username'       => 'javierlpedroza@qdata.io',//'api_bancolombia@chef.com', c
+			'password'       => 'KG\4!wJu',//'IBMBancolombia2015!',
+			'engage_server'  => 2,
+        );
+        return new EngagePod($auth);   
+    }
+
     public function getToken() {
         $host = 'https://api2.ibmmarketingcloud.com:443/rest';
         $key = 'javierlpedroza@qdata.io';
@@ -43,23 +52,33 @@ class FormController extends Controller
         $json_result = curl_exec($ch);
         
         $result = json_decode($json_result);
-        dd($result);
+        
+    }
+
+    public function getData(Request $request) {     
+        $cat = array(
+            '1' => '10086176',
+            '2' => '10073855'
+        );
+
+        $silverpop = self::loginSilverpop();   
+        $document = $request->document;
+
+        $columns = array(
+         'Numero de Documento'
+        );
+
+        $silverpop->getContact($cat[2], null, 10086615, null,true, $columns);
     }
 
     public function setData(Request $request) {       
        // self::getToken(); 
-        	
-	
-        $auth = array(
-			'username'       => 'javierlpedroza@qdata.io',//'api_bancolombia@chef.com', c
-			'password'       => 'E1s13N}n',//'IBMBancolombia2015!',
-			'engage_server'  => 3,
-        );
-        $silverpop = new EngagePod($auth);   
-
+        		
+       $silverpop = self::loginSilverpop();
 
         $cat = array(
-            '1' => '10086176'
+            '1' => '10086176',
+            '2' => '10888559'
         );
 
         if (isset($request['dataUser'])) {
@@ -71,17 +90,19 @@ class FormController extends Controller
                 self::response('Error: el campo Apellido es obligatorio, por favor ingresarlo.');
             } else {
                 $columns = array(
-                    'documento' => 'CC',
+                    'documento' => $request['dataUser']['typedocument'],
 					'numeroDocumento' => 	$request['dataUser']['document'],
 					'nombre' =>	$request['dataUser']['name'],
                     'apellido' => $request['dataUser']['lastName'],
-                    'celular' => 3114426177,
-                    'producto' => 'telefono',
-                    'correo' => 'javierlpedroza@qdata.io',
-                    'aceptaTerminos' => true,
+                    'celular' => $request['dataUser']['cellphone'],
+                    'producto1' => isset($request['dataUser']['product'][0]) ? $request['dataUser']['product'][0] : '',
+                    'producto2' => isset($request['dataUser']['product'][1]) ? $request['dataUser']['product'][1] : '',
+                    'producto3' => isset($request['dataUser']['product'][2]) ? $request['dataUser']['product'][2]: '' ,
+                    'Email' => $request['dataUser']['email'],
+                    'aceptaTerminos' => $request['dataUser']['accept_terms'],
                 );
                
-                $addContact = $silverpop->addContact($cat[1], true, $columns);
+                $addContact = $silverpop->addContact($cat[1], true, $columns);                
                 self::response($addContact);
             }
 

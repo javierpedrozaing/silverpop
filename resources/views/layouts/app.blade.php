@@ -7,14 +7,15 @@
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
             <script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
-            <link rel="stylesheet" href="{{ URL::asset('css/main.css') }}" />
+            <link rel="stylesheet" href="{{ URL::asset('css/main.css') }}" />            
+            <link rel="stylesheet" href="{{ URL::asset('css/mobile.css') }}" />            
             <meta name="viewport" content="width=device-width, user-scalable=no">
         <title>@yield('title')</title>
     </head>
     <body>
        <header> 
-            <img src="/img/logo-exito.png" alt="" class="logo">            
-            <h2 class="header">¡Ahora la promo la puedes escoger tú!</h2>
+            <img src="/img/new-logo.png" alt="" class="logo">            
+            <h2 class="header">Una promo buena de verdad te deja elejir tus descuentos</h2>
        </header>
         <div class="container">
             @yield('content')
@@ -25,5 +26,17 @@
                 <p><a href="" class="show_terms">Ver términos y condiciones</a></p>
             </div>            
         </footer>
+        <div class="modal-success-desktop" hidden >
+            <p class="close-modal">X</p>            
+            <div class="content-modal">
+                <h3>Descarga el calendario con todas las promociones</h3>       
+                <img src="/img/download.png" alt="">
+                <p><a href="">calenadario_promociones.ics</a></p>                
+                <input class="btn btn-primary" type="button" value="Enviar">
+            </div>
+        </div>
+        <div class="modal-success-mobile">
+
+        </div>
     </body>
 </html>

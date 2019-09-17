@@ -1,0 +1,95 @@
+@media (max-width: 600px) {
+    .form-group.custom-control.custom-radio{
+        margin: 5px 0px 10px 11%;
+    }
+
+    .modal-success-desktop .content-modal input{
+        width: auto;
+    }
+
+    .modal-success-desktop .content-modal{
+        margin: 47% auto;
+        width: auto;
+    }
+
+    .setup-content .info-required{
+        margin: 5px 0px 24px 12%;
+    }
+
+    .form-group.custom-control.custom-radio{
+        width: 100%;
+    }
+
+    form{
+        width: 100%;
+    }
+    
+}
+
+@media (max-width: 800px) {
+  .form-group.custom-control.custom-radio {
+        width: 60%;
+        margin: 5px 0px 10px 10%;
+    }
+    .logo{
+        max-width: 15%;
+    }
+    
+}
+
+@media (min-width: 800px) {
+ 
+    .setup-content p:first-child{
+        width: auto;
+    }
+
+    .logo{
+        max-width: 4%;
+    }
+
+    .setup-content .info-required{
+        margin: 5px 0px 24px 7%;
+    }
+
+    .custom-radio small{
+        margin: 0 52px;
+        left: -11%;
+        position: relative;
+    }
+
+
+
+}
+
+@media (min-width: 1152px) {
+    .custom-radio small{
+        left: -75px;
+    }
+    .form-group.custom-control.custom-radio{
+        margin: 5px 0px 10px 1%;
+    }
+}
+
+
+@media (min-width: 1360px) {
+    .custom-radio small{
+        margin: 0 83px;
+        left: -19%;
+        position: relative;
+    }
+
+    .form-group.custom-control.custom-radio{
+        margin: 5px 0px 10px 0%;
+    }
+
+    .form-group.custom-control.custom-radio{
+        width: 60%;
+    }   
+}
+
+@media (min-width: 1720px) {
+    .form-group.custom-control.custom-radio{
+        width: 47%;
+    }   
+}
+

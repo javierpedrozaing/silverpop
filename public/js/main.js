@@ -1,7 +1,25 @@
 $(document).ready(function(){
 
-    $('.select-product').selectpicker();
-    $('.select-document').selectpicker();
+    $(".modal-success-desktop .close-modal").click(function(){
+        $(".modal-success-desktop").hide();
+    });
+
+    var selectedProduct = new Array;
+    var selectedDocument;
+    $("#selectProduct").on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+        if (isSelected) {
+            selectedProduct.push(e.target.options[clickedIndex].value);            
+        }
+        
+        console.log("selected product", selectedProduct);
+    
+    });
+    $("#selectDocument").change(function(){
+        selectedDocument = $(this).children("option:selected").val();        
+        console.log("selected document type ", selectedDocument);
+
+    });
+
     var navListItems = $('div.setup-panel div a'),
     allWells = $('.setup-content'),
     allNextBtn = $('.nextBtn'),    
@@ -92,59 +110,74 @@ $(document).ready(function(){
             if (isValid){                                               
                 //console.log($(this[0]));
                 $(this).trigger('submit');
-                setData();              
+                setData(selectedProduct, selectedDocument);              
             }
         });
       
     $('div.setup-panel div a.btn-primary.first').trigger('click');
-    
+    autocomplete();
 });    
 
-function setData() {
+function autocomplete(){
+    $("#document").focusout(function(){
+        var get_document = $(this).val();
+        if (get_document.length > 0) {
+            console.log("documento ", get_document.length);
+            $.ajax({
+                type:'POST', 
+                url:'/getData',
+                data: {document: get_document},
+    
+                success:function(data){ 
+                   console.log("response ", data);
+                 
+                }
+             }); 
+        }
+    });
+}
+
+function setData(selectedProduct, selectedDocument) {
     console.log("set data");
-    var send = true;
-    var dataUser = {
-        'document': 1234,
-        'name': 'Javier',
-        'lastName': 'Pedroza',
-        'JOB_ID': 254
+    var send = false;
+   
+    var products = selectedProduct;
+    var typedocument = selectedDocument;
+    var document = $("#document").val();    
+    var name = $("#name").val();
+    var lastName = $("#lastName").val();
+    var cellphone = $("#cellPhone").val();
+    var email = $("#email").val();
+    var accept_terms = $("input[name='accept_terms']:checked").val();
+
+    
+    if (products && typedocument && document && name && lastName && cellphone && email && accept_terms) {
+        send = true;
     }
+    var dataUser = {
+        'product': products,
+        'typedocument': typedocument,
+        'document': document,
+        'name': name,
+        'lastName': lastName,
+        'cellphone': cellphone,
+        'email': email,
+        'accept_terms' : accept_terms == 'on' ? 'si' : 'no',
+    }
+   
+
     if(send) {
+        console.log("datos completos ? ", send, dataUser);
         $.ajax({
             type:'POST', 
             url:'/setData',
             data:{dataUser},
  
-            success:function(data){
- 
+            success:function(data){ 
                console.log("response ", data);
+               $('.modal-success-desktop').show();
             }
          });       	
     }
-	// console.log($('#description').val());
-	// console.log($('#url').val());
-	// $('.loader').show();
-	// var send = true;
-	// if($('#type').val() == '')
-	// 	send = false;
-	// if($('#description').val() == '')
-	// 	send = false;
-	// if(send){
-	// 	$.post( "index.php", { 
-	// 		ajax: true,
-	// 		task: "setData",
-	// 		type: $('#type').val(),
-	// 		description: $('#description').val(),
-	// 		url: $('#url').val()
-	// 	})
-	// 	.done(function( data ) {
-	// 		console.log('finish');
-	// 		$('.loader').hide();
-	// 		var info = $.parseJSON(data);
-	// 		if(info.response)
-	// 			alert('Mensaje enviado con exito con el ID: ' + info.message);
-	// 		else
-	// 			alert('Ocurrio un error enviando el mailing');
-	// 	});
-	// }
+
 }

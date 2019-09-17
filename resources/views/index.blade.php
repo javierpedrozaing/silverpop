@@ -14,14 +14,14 @@
                 <p>Completa el formulario</p>
               </div>              
             </div>
-          </div>
+        </div>
           
           <form role="form" action="" method="post">
             <div class="row setup-content" id="step-1">              
-                <div class="col-xs-12 col-lg-4 col-lg-offset-3">
+                <div class="col-xs-12 col-md-6 col-md-offset-3">
                   <p>Escoge aquí los productos de los que quieres recibir información.</p>
-                  <div class="form-group">
-                        <select  title="¿Qué producto buscas?" class="selectpicker"  multiple data-max-options="3" id="select-product" data-live-search="true" >                               
+                    <div class="form-group">
+                        <select  title="¿Qué producto buscas?" class="selectpicker"  multiple data-max-options="3" id="selectProduct" data-live-search="true" >                               
                             <optgroup data-max-options="3">
                                @foreach ($products as $product)
                                  <option data-tokens="{{$product}}">{{$product}}</option>                                
@@ -29,61 +29,67 @@
                             </optgroup>
                         </select>
                         <p class="field-required"></p>
-                        <p>- Puedes escoger máximo 3 productos</p>   
-                  </div>               
+                        <p>Puedes escoger máximo 3 productos</p>   
+                    </div>
                   <button class="btn btn-primary nextBtn" type="button">Siguiente</button>
                 </div>
               
             </div>
-            <div class="row setup-content" id="step-2">
-              <div class="col-xs-12 col-lg-4 ">
-                    <p>Completa el formulario y recibe información de los productos que más te gustan.</p>
-                               
-                    <div class="form-group">                    
-                        <select class="selectpicker" id="select-document" title="Tipo de documento*">
-                                <option>Cédula d extranjería</option>
-                                <option>Cédula de ciudadanía</option>
-                                <option>Tarjeta pasaporte</option>
+            <div class="row setup-content" id="step-2">              
+                <p>Veriica que tu información este correcta. De lo contrario puedes editarla</p>                               
+                <div class="col-xs-12 col-md-6 ">
+                    <div class="form-group">  
+                        <label for="typeDocument">Tipo de documento*</label>                  
+                        <select class="selectpicker" name="typeDocument" id="selectDocument" title="Tipo de documento*">
+                                <option value="cc">Cédula de ciudadanía</option>
+                                <option value="cedula_extranjeria">Cédula de extranjería</option>
+                                <option value="tarjeta_profesional">Tarjeta pasaporte</option>
                         </select>          
                         <p class="field-required"></p>                
                     </div>
-                    <div class="form-group">                    
-                        <input maxlength="200" type="text" required="required" class="form-control" novalidate="true"  name="document"  placeholder="Número de documento" >
+                    <div class="form-group">   
+                        <label for="documento">Número de documento*</label>                 
+                        <input maxlength="200" type="text" required="required" class="form-control" id="document" novalidate="true"  name="document"  placeholder="Número de documento" >
+                        <p class="field-required"></p>
+                    </div>
+                    <div class="form-group">           
+                      <label for="name">Nombre*</label>         
+                        <input maxlength="200" type="text" required="required" class="form-control" id="name" name="name" placeholder="Nombre*" >
+                        <p class="field-required"></p>
+                    </div>
+              </div>
+              <div class="col-xs-12 col-md-6" id="more-info">
+                    <div class="form-group">                   
+                        <label for="lastName">Apellido*</label>          
+                        <input maxlength="200" type="text" required="required" class="form-control" id="lastName" name="lastName" placeholder="Apellido*">
+                        <p class="field-required"></p>
+                    </div>
+                    <div class="form-group">    
+                        <label for="cellphone">Celular*</label>                    
+                        <input maxlength="200" type="text" required="required" class="form-control" id="cellPhone" name="cellphone" placeholder="Celular*">
                         <p class="field-required"></p>
                     </div>
                     <div class="form-group">                    
-                        <input maxlength="200" type="text" required="required" class="form-control" name="name" placeholder="Nombre*" >
+                        <label for="email">Correo electrónico*</label>    
+                        <input maxlength="200" type="text" required="required" class="form-control" id="email" name="email" placeholder="Correo electrónico**">
                         <p class="field-required"></p>
                     </div>
-                    <div class="form-group">                    
-                        <input maxlength="200" type="text" required="required" class="form-control" name="lastName" placeholder="Apellido*">
-                        <p class="field-required"></p>
-                    </div>
-                    <div class="form-group">                    
-                        <input maxlength="200" type="text" required="required" class="form-control" name="cellphone" placeholder="Celular*">
-                        <p class="field-required"></p>
-                    </div>
-                    <div class="form-group">                    
-                        <input maxlength="200" type="text" required="required" class="form-control" name="email" placeholder="Correo electrónico**">
-                        <p class="field-required"></p>
-                    </div>
-
-                    <p>Los campos marcados con * son obligatorios</p>
-                    <br>
-
+              </div>              
+             
+                <p class="info-required">Los campos marcados con * son obligatorios</p>                         
                     <div class="form-group custom-control custom-radio">    
-                      <div class="form-control"><input type="radio" name="" id="accept_terms" class="custom-control-input" placeholder=""></div>                                      
+                      <div class="form-control"><input type="radio" name="accept_terms" id="accept_terms" class="custom-control-input" placeholder=""></div>                                      
                       <small id="helpId" class="text-muted">Acepto <a href="">terminos y condiciones</a> y autorizo el  <a>tratamiento de mis datos personales</a></small>
                       <br>
-                      <p class="field-required"></p>
+                    
                     </div>
+                    <p class="field-required"></p>
                   <!--<button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button> -->
                   <button class="btn btn-primary sendBtn" type="submit">Enviar</button>                
-              </div>
-            </div>        
+             
+            </div>   
+            
+            
           </form>          
-        </div>
-        <div class="modal-success">
-          
-        </div>
+        </div>        
 @endsection

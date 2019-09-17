@@ -13,3 +13,4 @@
     
 Route::get('/', 'FormController@index');
 Route::post('setData', 'FormController@setData');
+Route::post('getData', 'FormController@getData');
